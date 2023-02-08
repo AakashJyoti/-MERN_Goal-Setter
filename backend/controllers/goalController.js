@@ -34,14 +34,13 @@ const putGoal = asyncHandler(async (req, res) => {
   }
 
   // Check for User
-  const user = await User.findById(req.user.id);
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
   // Making sure only logged user is goal user
-  if (goal.user.toString() !== user.id) {
+  if (goal.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not Authorized");
   }
@@ -65,25 +64,18 @@ const deleteGoal = asyncHandler(async (req, res) => {
   }
 
   // Check for User
-  const user = await User.findById(req.user.id);
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
   // Making sure only logged user is goal user
-  if (goal.user.toString() !== user.id) {
+  if (goal.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not Authorized");
   }
 
-  // const deleteGoal = await Goal.findByIdAndDelete(req.params.id, {
-  //   new: true,
-  // });
-
   await goal.remove();
-
-  // res.status(200).json(deleteGoal);
   res.status(200).json({ id: req.params.id });
 });
 
