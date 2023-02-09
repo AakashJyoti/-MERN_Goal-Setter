@@ -18,8 +18,9 @@ const GoalForm = () => {
     <section className="form">
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="text">Goal</label>
+          <label htmlFor="text">Enter your Goal</label>
           <input
+            placeholder="Enter goal"
             type="text"
             name="text"
             id="text"
